@@ -14,10 +14,22 @@ import { HousingService } from '../housing.service';
 export class HomeComponent {
  housingLocationList: Housinglocation[] = [];
  housingService: HousingService = inject(HousingService);
+ filteredLocationList: Housinglocation[] = [];
 
  constructor() {
   this.housingService.getAllHousingLocations().then((housingLocationList: Housinglocation[]) => {
     this.housingLocationList = housingLocationList;
+    // filteredLocationList starts off with all results since filter input starts empty
+    this.filteredLocationList = housingLocationList;
   });
+ }
+
+ filterResults(text: string) {
+  // get all results if search button is clicked with no input
+  if (!text) this.filteredLocationList = this.housingLocationList;
+  
+  this.filteredLocationList = this.housingLocationList.filter(
+    housingLocation => housingLocation?.city.toLowerCase().includes(text.toLowerCase())
+  );
  }
 }
