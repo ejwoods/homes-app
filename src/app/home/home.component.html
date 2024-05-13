@@ -1,6 +1,7 @@
 <section>
   <form>
     <input type="text" placeholder="Filter by city" #filter>
+    <!-- TODO: fix bug where only clicking button filters results and hitting Enter reloads page -->
     <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
   </form>
 </section>
